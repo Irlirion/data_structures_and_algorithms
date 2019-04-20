@@ -1,8 +1,8 @@
 class LinkedList:
     class __Node:
-        def __init__(self, item, next=None):
+        def __init__(self, item, next_=None):
             self.item = item
-            self.next = next
+            self.next = next_
 
         def get_item(self):
             return self.item
@@ -47,11 +47,11 @@ class LinkedList:
                     type(other)))
         result = LinkedList()
         cursor = self.__first.get_next()
-        while cursor:
+        while cursor is not None:
             result.append(cursor.get_item())
             cursor = cursor.get_next()
         cursor = other.__first.get_next()
-        while cursor:
+        while cursor is not None:
             result.append(cursor.get_item())
             cursor = cursor.get_next()
         return result
@@ -85,28 +85,3 @@ class LinkedList:
             self.__num_items += 1
         else:
             self.append(item)
-
-
-if __name__ == '__main__':
-    l_list = LinkedList(1, 0, 3)
-    l_list.append(1)
-    l_list.insert(2, 1)
-    l_list.insert(100, 100)
-    print(len(l_list))
-    print(l_list)
-    print(LinkedList())
-    l_list += LinkedList(1, 3)
-    try:
-        l_list += 2
-    except TypeError:
-        print('TypeError')
-    l_list[1] = 2
-    try:
-        l_list[100] = 2
-    except IndexError:
-        print('IndexError')
-    print(l_list[1])
-    try:
-        print(l_list[100])
-    except IndexError:
-        print('IndexError')
