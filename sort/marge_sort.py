@@ -11,10 +11,10 @@ def merge_sort(arr: list) -> list:
     left, right = merge_sort(arr[:mid]), merge_sort(arr[mid:])
 
     # Merge each side together
-    return merge(left, right, arr.copy())
+    return __merge(left, right, arr.copy())
 
 
-def merge(left: list, right: list, merged: list) -> list:
+def __merge(left: list, right: list, merged: list) -> list:
     """
     Merge helper
     Complexity: O(n)
@@ -43,12 +43,12 @@ def merge(left: list, right: list, merged: list) -> list:
 if __name__ == '__main__':
     import random
 
-    lst = random.sample(range(10 ^ 9), k=10 ^ 9)
-    lst = merge_sort(lst)
+    lst = random.sample(range(10**5), k=10**5)
+    lst_sorted = merge_sort(lst)
     print(all(
         map(lambda x: x[0] <= x[1],
-            zip(lst[:-1],
-                lst[1:]
+            zip(lst_sorted[:-1],
+                lst_sorted[1:]
                 )
             )
     )
