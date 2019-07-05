@@ -67,3 +67,31 @@ class TestLinkedList(TestCase):
         lst.add_in_tail(Node(3))
         lst.add_in_tail(nd3)
         self.assertEqual(lst.find_all(1), [nd1, nd2, nd3])
+
+    def test_clean(self):
+        lst = LinkedList()
+        lst.clean()
+        self.assertEqual(values(lst), [])
+
+        lst.add_in_tail(Node(1))
+        lst.clean()
+        self.assertEqual(values(lst), [])
+
+        lst.add_in_tail(Node(1))
+        lst.add_in_tail(Node(2))
+        lst.add_in_tail(Node(3))
+        lst.clean()
+        self.assertEqual(values(lst), [])
+
+    def test_len(self):
+        lst = LinkedList()
+        self.assertEqual(lst.len(), 0)
+
+        lst.add_in_tail(Node(1))
+        self.assertEqual(lst.len(), 1)
+
+        lst.add_in_tail(Node(1))
+        self.assertEqual(lst.len(), 2)
+
+        lst.delete(1)
+        self.assertEqual(lst.len(), 1)

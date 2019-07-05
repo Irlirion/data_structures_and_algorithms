@@ -39,7 +39,7 @@ class LinkedList:
             if node.value == val:
                 lst.append(node)
             node = node.next
-        return lst  # здесь будет ваш код
+        return lst
 
     def delete(self, val, all=False):
         if self.head is None:
@@ -66,10 +66,20 @@ class LinkedList:
                 node = node.next
 
     def clean(self):
-        pass  # здесь будет ваш код
+        while self.head is not None:
+            node = self.head
+            self.head = node.next
+            node.next = None
+            del node
+        self.tail = None
 
     def len(self):
-        return 0  # здесь будет ваш код
+        len = 0
+        node = self.head
+        while node is not None:
+            len += 1
+            node = node.next
+        return len
 
     def insert(self, afterNode, newNode):
         pass  # здесь будет ваш код
