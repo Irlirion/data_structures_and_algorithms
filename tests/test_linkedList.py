@@ -95,3 +95,21 @@ class TestLinkedList(TestCase):
 
         lst.delete(1)
         self.assertEqual(lst.len(), 1)
+
+    def test_insert(self):
+        lst = LinkedList()
+        nd = Node(1)
+        lst.insert(None, nd)
+        self.assertEqual(values(lst), [1])
+
+        nd1 = Node(2)
+        lst.insert(nd, nd1)
+        self.assertEqual(values(lst), [1, 2])
+
+        nd2 = Node(3)
+        lst.insert(nd, nd2)
+        self.assertEqual(values(lst), [1, 3, 2])
+
+        nd3 = Node(4)
+        lst.insert(None, nd3)
+        self.assertEqual(values(lst), [4, 1, 3, 2])
