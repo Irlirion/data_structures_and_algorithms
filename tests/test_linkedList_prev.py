@@ -109,14 +109,10 @@ class TestLinkedList(TestCase):
     def test_find_all(self):
         lst = LinkedList2()
         self.assertEqual(lst.find_all(1), [])
-        self.assertEqual(lst.head, None)
-        self.assertEqual(lst.tail, None)
 
         nd = Node(2)
         lst.add_in_tail(nd)
         self.assertEqual(lst.find_all(2), [nd])
-        self.assertEqual(lst.head, nd)
-        self.assertEqual(lst.tail, nd)
 
         nd1 = Node(1)
         nd2 = Node(1)
@@ -126,8 +122,6 @@ class TestLinkedList(TestCase):
         lst.add_in_tail(Node(3))
         lst.add_in_tail(nd3)
         self.assertEqual(lst.find_all(1), [nd1, nd2, nd3])
-        self.assertEqual(lst.head, nd)
-        self.assertEqual(lst.tail, nd3)
 
     def test_clean(self):
         lst = LinkedList2()
@@ -153,25 +147,17 @@ class TestLinkedList(TestCase):
     def test_len(self):
         lst = LinkedList2()
         self.assertEqual(lst.len(), 0)
-        self.assertEqual(lst.head, None)
-        self.assertEqual(lst.tail, None)
 
         nd = Node(1)
         lst.add_in_tail(nd)
         self.assertEqual(lst.len(), 1)
-        self.assertEqual(lst.head, nd)
-        self.assertEqual(lst.tail, nd)
 
         nd1 = Node(1)
         lst.add_in_tail(nd1)
         self.assertEqual(lst.len(), 2)
-        self.assertEqual(lst.head, nd)
-        self.assertEqual(lst.tail, nd1)
 
         lst.delete(1)
         self.assertEqual(lst.len(), 1)
-        self.assertEqual(lst.head, nd1)
-        self.assertEqual(lst.tail, nd1)
 
     def test_insert(self):
         lst = LinkedList2()
@@ -195,6 +181,20 @@ class TestLinkedList(TestCase):
 
         nd3 = Node(4)
         lst.insert(None, nd3)
-        self.assertEqual(values(lst), [4, 1, 3, 2])
-        self.assertEqual(lst.head, nd3)
-        self.assertEqual(lst.tail, nd1)
+        self.assertEqual(values(lst), [1, 3, 2, 4])
+        self.assertEqual(lst.head, nd)
+        self.assertEqual(lst.tail, nd3)
+
+    def test_add_in_tail(self):
+        lst = LinkedList2()
+        nd = Node(1)
+        lst.add_in_head(nd)
+        self.assertEqual(values(lst), [1])
+
+        nd1 = Node(2)
+        lst.add_in_head(nd1)
+        self.assertEqual(values(lst), [2, 1])
+        self.assertEqual(lst.head.prev, None)
+        self.assertEqual(lst.head.next, nd)
+        self.assertEqual(lst.tail.prev, nd1)
+        self.assertEqual(lst.tail.next, None)

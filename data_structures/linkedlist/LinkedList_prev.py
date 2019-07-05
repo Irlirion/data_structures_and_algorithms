@@ -4,22 +4,12 @@ class Node:
         self.prev = None
         self.next = None
 
-    def __str__(self):
-        return str(self.value)
 
 
 class LinkedList2:
     def __init__(self):
         self.head = None
         self.tail = None
-
-    def __str__(self):
-        lst = '['
-        node = self.head
-        while node.next is not None:
-            lst += str(node) + ', '
-            node = node.next
-        return lst + str(node) + ']'
 
     def add_in_tail(self, item):
         if self.head is None:
@@ -82,13 +72,41 @@ class LinkedList2:
                 node.next.prev = node.prev
 
     def clean(self):
-        pass  # здесь будет ваш код
+        while self.head is not None:
+            node = self.head
+            self.head = node.next
+            node.next = None
+            node.prev = None
+            del node
+        self.tail = None
 
     def len(self):
-        return 0  # здесь будет ваш код
+        len = 0
+        node = self.head
+        while node is not None:
+            len += 1
+            node = node.next
+        return len
 
     def insert(self, afterNode, newNode):
-        pass  # здесь будет ваш код
+        if afterNode is None:
+            self.add_in_tail(newNode)
+        else:
+            node = afterNode.next
+            afterNode.next = newNode
+            newNode.prev = afterNode
+            newNode.next = node
+            if node is None:
+                self.tail = newNode
+            else:
+                node.prev = newNode
 
     def add_in_head(self, newNode):
-        pass  # здесь будет ваш код
+        if self.tail is None:
+            self.tail = newNode
+            newNode.prev = None
+            newNode.next = None
+        else:
+            self.head.prev = newNode
+            newNode.next = self.head
+        self.head = newNode
