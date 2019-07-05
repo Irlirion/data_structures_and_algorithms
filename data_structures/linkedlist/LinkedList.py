@@ -51,6 +51,8 @@ class LinkedList:
             if node.value == val:
                 if node_before is None:
                     self.head = self.head.next
+                    if self.head is None:
+                        self.tail = None
                 elif node.next is None:
                     node_before.next = None
                     self.tail = node_before
@@ -85,6 +87,8 @@ class LinkedList:
         if self.head is None or afterNode is None:
             newNode.next = self.head
             self.head = newNode
+            if self.head.next is None:
+                self.tail = self.head
         else:
             node = afterNode.next
             afterNode.next = newNode
