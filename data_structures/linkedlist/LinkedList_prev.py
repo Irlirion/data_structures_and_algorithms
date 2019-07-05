@@ -58,18 +58,19 @@ class LinkedList2:
                     node.next.prev = node.prev
         else:
             node = self.find(val)
-            if node.prev is None:
-                self.head = node.next
-                if self.head is None:
-                    self.tail = None
+            if node is not None:
+                if node.prev is None:
+                    self.head = node.next
+                    if self.head is None:
+                        self.tail = None
+                    else:
+                        node.next.prev = None
+                elif node.next is None:
+                    node.prev.next = None
+                    self.tail = node.prev
                 else:
-                    node.next.prev = None
-            elif node.next is None:
-                node.prev.next = None
-                self.tail = node.prev
-            else:
-                node.prev.next = node.next
-                node.next.prev = node.prev
+                    node.prev.next = node.next
+                    node.next.prev = node.prev
 
     def clean(self):
         while self.head is not None:
