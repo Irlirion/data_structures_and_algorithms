@@ -56,12 +56,20 @@ class TestLinkedList(TestCase):
         self.assertEqual(values(lst), [2])
         self.assertEqual(lst.head, nd)
         self.assertEqual(lst.tail, nd)
+        self.assertEqual(lst.head.prev, None)
+        self.assertEqual(lst.head.next, None)
+        self.assertEqual(lst.tail.prev, None)
+        self.assertEqual(lst.tail.next, None)
 
         lst.add_in_tail(nd1)
         lst.delete(2)
         self.assertEqual(values(lst), [1])
         self.assertEqual(lst.head, nd1)
         self.assertEqual(lst.tail, nd1)
+        self.assertEqual(lst.head.prev, None)
+        self.assertEqual(lst.head.next, None)
+        self.assertEqual(lst.tail.prev, None)
+        self.assertEqual(lst.tail.next, None)
 
         lst = LinkedList2()
         nd2 = Node(3)
@@ -72,6 +80,10 @@ class TestLinkedList(TestCase):
         self.assertEqual(values(lst), [1, 3])
         self.assertEqual(lst.head, nd1)
         self.assertEqual(lst.tail, nd2)
+        self.assertEqual(lst.head.prev, None)
+        self.assertEqual(lst.head.next, nd2)
+        self.assertEqual(lst.tail.prev, nd1)
+        self.assertEqual(lst.tail.next, None)
 
         lst = LinkedList2()
         nd3 = Node(3)
@@ -89,6 +101,10 @@ class TestLinkedList(TestCase):
         self.assertEqual(values(lst), [3, 3])
         self.assertEqual(lst.head, nd2)
         self.assertEqual(lst.tail, nd3)
+        self.assertEqual(lst.head.prev, None)
+        self.assertEqual(lst.head.next, nd3)
+        self.assertEqual(lst.tail.prev, nd2)
+        self.assertEqual(lst.tail.next, None)
 
     def test_find_all(self):
         lst = LinkedList2()
