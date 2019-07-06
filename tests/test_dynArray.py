@@ -40,12 +40,20 @@ class TestDynArray(TestCase):
         self.assertEqual(da.count, 31)
 
         da = DynArray()
+        for i in range(3):
+            da.append(i)
+        da.delete(1)
+        self.assertEqual([da[i] for i in range(len(da))], [0, 2])
+        self.assertEqual(da.capacity, 16)
+        self.assertEqual(da.count, 2)
+
+        da = DynArray()
         da.resize(18)
         for i in range(9):
             da.append(i)
         da.delete(0)
         self.assertEqual([da[i] for i in range(len(da))], [i for i in range(1, 9)])
-        self.assertEqual(da.capacity, 18)
+        self.assertEqual(da.capacity, 16)
         self.assertEqual(da.count, 8)
 
         self.assertRaises(IndexError, da.delete, 8)
