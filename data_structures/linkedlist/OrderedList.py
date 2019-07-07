@@ -4,6 +4,9 @@ class Node:
         self.prev = None
         self.next = None
 
+    # def __str__(self):
+    #     return str(self.value)
+
 
 class OrderedList:
     def __init__(self, asc):
@@ -18,15 +21,24 @@ class OrderedList:
             return 1
         return 0
 
+    # def __str__(self):
+    #     r = '['
+    #     node = self.head
+    #     while node.next is not None:
+    #         r += str(node.value) + ', '
+    #         node = node.next
+    #     return r + str(node.value) + ']'
+
     def add(self, value):
         new_node = Node(value)
         if self.head == self.tail is None:
             self.head = new_node
             self.tail = new_node
+            return
         node = self.head
         while node is not None:
-            if self.__ascending and self.compare(new_node, node) == -1 or not self.__ascending and self.compare(
-                    new_node, node) == 1:
+            if self.__ascending and self.compare(new_node, node) <= 0 or not self.__ascending and self.compare(
+                    new_node, node) >= 0:
                 if node.prev is None:
                     # Голова
                     new_node.next = node
@@ -39,8 +51,7 @@ class OrderedList:
                     new_node.next = node
                     node.prev = new_node
                 return
-            elif (self.__ascending and self.compare(new_node, node) == 1 or not self.__ascending and self.compare(
-                    new_node, node) == -1) and node.next is None:
+            elif node.next is None:
                 # Хвост
                 node.next = new_node
                 new_node.prev = node
