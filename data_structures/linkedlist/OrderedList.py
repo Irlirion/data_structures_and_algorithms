@@ -93,7 +93,8 @@ class OrderedList:
         r = []
         node = self.head
         while node is not None:
-            r.append(node.value)
+            # r.append(node.value)
+            r.append(node)
             node = node.next
         return r
 
