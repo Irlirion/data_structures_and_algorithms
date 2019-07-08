@@ -11,8 +11,9 @@ class NativeDictionary:
         i = self.hash_fun(key)
         if self.slots[i] == key:
             return True
-        if key in self.slots:
-            return True
+        for i in range(self.size):
+            if self.slots[i] == key:
+                return True
         return False
 
     def put(self, key, value):
@@ -33,4 +34,8 @@ class NativeDictionary:
         i = self.hash_fun(key)
         if self.slots[i] == key:
             return self.values[i]
-        return self.values[self.slots.index(key)] if key in self.slots else None
+        else:
+            for i in range(self.size):
+                if self.slots[i] == key:
+                    return self.values[i]
+        return None
