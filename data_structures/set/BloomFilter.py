@@ -10,7 +10,6 @@ class BloomFilter:
         for c in str1:
             code = ord(c)
             s = (s * 17 + code) % self.filter_len
-        print(s)
         return s
 
     def hash2(self, str1):
@@ -19,7 +18,6 @@ class BloomFilter:
         for c in str1:
             code = ord(c)
             s = (s * 223 + code) % self.filter_len
-        print(s)
         return s
 
     def add(self, str1):
