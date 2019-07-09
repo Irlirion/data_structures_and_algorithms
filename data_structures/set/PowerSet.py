@@ -11,7 +11,7 @@ class PowerSet(HashTable):
         return self.ln
 
     def put(self, value):
-        if self.find(value) is None:
+        if not self.get(value):
             i = self.seek_slot(value)
             if i is not None:
                 self.slots[i] = value
