@@ -1,6 +1,6 @@
-from data_structures.set.HashTable import HashTable
-
-
+# from data_structures.set.HashTable import HashTable
+#
+#
 class PowerSet(HashTable):
 
     def __init__(self):
