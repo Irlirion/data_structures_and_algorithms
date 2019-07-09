@@ -1,11 +1,35 @@
-# from data_structures.set.HashTable import HashTable
-#
-#
-class PowerSet(HashTable):
+class PowerSet:
 
     def __init__(self):
-        super().__init__(20000, 3)
+        self.size = 20000
+        self.step = 5
+        self.slots = [None] * self.size
         self.ln = 0
+
+    def hash_fun(self, value):
+        return hash(value) % self.size
+
+    def seek_slot(self, value):
+        i = self.hash_fun(value)
+        while i < self.size and self.slots[i] is not None:
+            i += self.step
+        if i >= self.size:
+            i = 0
+            while i < self.size and self.slots[i] is not None:
+                i += 1
+        if i >= self.size:
+            return None
+        return i
+
+    def find(self, value):
+        i = self.hash_fun(value)
+        if value == self.slots[i]:
+            return i
+        else:
+            for i in range(self.size):
+                if self.slots[i] == value:
+                    return i
+            return None
 
     def size(self):
         return self.ln
