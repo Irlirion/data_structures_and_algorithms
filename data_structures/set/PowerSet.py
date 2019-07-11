@@ -1,57 +1,22 @@
 class PowerSet:
 
     def __init__(self):
-        self.size = 20000
-        self.step = 5
-        self.slots = [None] * self.size
-        self.ln = 0
-
-    def hash_fun(self, value):
-        return hash(value) % self.size
-
-    def seek_slot(self, value):
-        i = self.hash_fun(value)
-        while i < self.size and self.slots[i] is not None:
-            i += self.step
-        if i >= self.size:
-            i = 0
-            while i < self.size and self.slots[i] is not None:
-                i += 1
-        if i >= self.size:
-            return None
-        return i
-
-    def find(self, value):
-        i = self.hash_fun(value)
-        if value == self.slots[i]:
-            return i
-        else:
-            for i in range(self.size):
-                if self.slots[i] == value:
-                    return i
-            return None
+        self.slots = dict()
 
     def size(self):
-        return self.ln
+        return len(self.slots)
 
     def put(self, value):
-        if not self.get(value):
-            i = self.seek_slot(value)
-            if i is not None:
-                self.slots[i] = value
-                self.ln += 1
-            return i
+        s = str(value)
+        if s not in self.slots:
+            self.slots[s] = value
 
     def get(self, value):
-        if self.slots[self.hash_fun(value)] is not None or value in self.slots:
-            return True
-        return False
+        return str(value) in self.slots
 
     def remove(self, value):
-        i = self.find(value)
-        if i is not None:
-            self.slots[i] = None
-            self.ln -= 1
+        if self.get(value):
+            self.slots.pop(str(value))
             return True
         return False
 
